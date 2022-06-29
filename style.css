@@ -1,0 +1,37 @@
+#ball{
+    background-color: aqua;
+    height: 16px;
+    width: 16px;
+    border-radius: 15px;
+    position: fixed;
+    left: 52px;
+    top: 25px;
+}
+
+
+#rod1{
+    /* display: flex; */
+    background-color: red;
+    color: white;
+    border-radius: 11px;
+    width: 151px;
+    position: fixed;
+    top: 0px;
+    text-align: center;
+}
+
+
+#rod2{
+    background-color: red;
+    color: white;
+    border-radius: 11px;
+    width: 151px;
+    bottom: 0px;
+    position: fixed;
+    text-align: center;
+}
+
+
+#container{
+    position: relative;
+}
