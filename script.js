@@ -114,55 +114,55 @@ function keyCode(keypress){
             let ballY = ballRect.y;
             let ballDia = ballRect.width;
 
-            let rod1Height = rod1.innerHeight;
-            let rod2Height = rod2.innerHeight;
-            let rod1Width = rod1.innerWidth;
-            let rod2Width = rod2.innerWidth;
+            let rod1Height = rod1.offsetHeight;
+            let rod2Height = rod2.offsetHeight;
+            let rod1Width = rod1.offsetWidth;
+            let rod2Width = rod2.offsetWidth;
 
-            movement = setInterval(function(){
+
+            movement = setInterval(function () {
+                // Move ball 
                 ballX += ballSpeedX;
                 ballY += ballSpeedY;
 
+                let rod1X = rod1.getBoundingClientRect().x;
+                let rod2X = rod2.getBoundingClientRect().x;
 
                 ball.style.left = ballX + 'px';
                 ball.style.top = ballY + 'px';
 
-                let rod1X = rod1.getBoundingClientRect();
-                let rod2X = rod2.getBoundingClientRect();
 
-                //Wall Reverse Side
-                if((ballX+ballDia) > windowWidth || ballX < 0){
-                    ballSpeedX = -ballSpeedX;                              
+                if ((ballX + ballDia) > windowWidth || ballX < 0) {
+                    ballSpeedX = -ballSpeedX; // Reverses the direction
                 }
 
-                let possition = ballX + ballDia/2;
+                // It specifies the center of the ball on the viewport
+                let ballPos = ballX + ballDia / 2;
 
-                //Rod1 Reverse
-                if(ballY <= rod1Height){
-                    ballSpeedY = -ballSpeedY;
+                // Check for Rod 1
+                if (ballY <= rod1Height) {
+                    ballSpeedY = -ballSpeedY; // Reverses the direction
                     score++;
 
-                    //Check for Game Over
-
-                    if((possition < rod1X) || (rod1X+rod1Width) < possition){
+                    // Check if the game ends
+                    if ((ballPos < rod1X) || (ballPos > (rod1X + rod1Width))) {
                         storeWin(rod2name, score);
                     }
-
                 }
-                //Rod2 Reverse
-                else if((ballY + ballDia) >= (windowHeight-rod2Height)){
-                    ballSpeedY = -ballSpeedY;
+
+                // Check for Rod 2
+                else if ((ballY + ballDia) >= (windowHeight - rod2Height)) {
+                    ballSpeedY = -ballSpeedY; // Reverses the direction
                     score++;
 
-                    //Check for Game Over
-
-                    if((possition < rod2X) || (rod2X+rod2Width) < possition){
+                    // Check if the game ends
+                    if ((ballPos < rod2X) || (ballPos > (rod2X + rod2Width))) {
                         storeWin(rod1name, score);
                     }
                 }
 
+            }, 10);
 
-            },10);
 
         }
     }
